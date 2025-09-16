@@ -4,14 +4,18 @@
 
 A world-class Wix application that creates engaging discount competitions using artificial intelligence, designed to boost sales and customer engagement without manual intervention.
 
+[![CI/CD Pipeline](https://github.com/andreaskviby/wix-plugin-discount-competition/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/andreaskviby/wix-plugin-discount-competition/actions/workflows/ci-cd.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
+
 ## 🌟 Overview
 
 The Wix Discount Competition Master is a revolutionary plugin that combines AI content generation, gamification, and e-commerce automation to create compelling discount competitions for Wix stores. Built with cutting-edge technology and following Wix best practices, this app delivers a seamless, no-code experience that drives sales and customer engagement.
 
 ### ✨ Key Features
 
-- 🤖 **AI-Powered Content Generation**: Leverages OpenAI GPT-5 and Anthropic Claude for creating engaging competition content
-- 🌍 **Multi-Language Support**: Automatically generates content in your customers' preferred languages
+- 🤖 **AI-Powered Content Generation**: Leverages OpenAI GPT and Anthropic Claude for creating engaging competition content
+- 🌍 **Multi-Language Support**: Automatically generates content in your customers' preferred languages  
 - 🎯 **Autonomous Operation**: Runs competitions automatically without store owner intervention
 - 📊 **Advanced Analytics**: Comprehensive sales tracking and ROI measurement
 - 🎨 **No-Code Setup**: Intuitive configuration with beautiful Wix Design System components
@@ -51,23 +55,35 @@ Based on extensive market research, the app supports the most engaging competiti
 ### Prerequisites
 - Wix Store with eCommerce enabled
 - Node.js 16+ for development
-- Basic understanding of Wix apps (optional)
+- MongoDB for data storage
+- Redis for caching (optional)
 
 ### Installation
-1. **Install from Wix App Market** (Coming Soon)
-   ```
-   Visit Wix App Market → Search "Discount Competition Master" → Install
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/andreaskviby/wix-plugin-discount-competition.git
+   cd wix-plugin-discount-competition
    ```
 
-2. **Development Setup**
+2. **Install dependencies**
    ```bash
-   git clone https://github.com/your-username/wix-plugin-discount-competition.git
-   cd wix-plugin-discount-competition
    npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your configuration
+   ```
+
+4. **Start development servers**
+   ```bash
    npm run dev
    ```
 
 ### Configuration
+
 1. **Connect to Your Wix Store**: One-click OAuth integration
 2. **Configure AI Settings**: Set up OpenAI and Anthropic API keys
 3. **Customize Branding**: Match your store's visual identity
@@ -78,59 +94,59 @@ Based on extensive market research, the app supports the most engaging competiti
 
 ```
 wix-plugin-discount-competition/
-├── 📁 docs/                    # Comprehensive documentation
-│   ├── MARKET_RESEARCH.md      # In-depth market analysis
-│   ├── DETAILED_TODO_LISTS.md  # Phase-by-phase development tasks
-│   ├── TESTING_GUIDE.md        # Complete testing procedures
-│   ├── RELEASE_GUIDE.md        # Production deployment guide
-│   └── WIX_DEVELOPMENT_GUIDE.md # Wix-specific best practices
-├── 📁 src/                     # Source code (to be developed)
-│   ├── dashboard/              # Wix dashboard interface
-│   ├── backend/                # Node.js API services
-│   ├── shared/                 # Shared utilities
-│   └── public/                 # Site widgets
+├── 📁 .github/workflows/       # CI/CD pipelines
 ├── 📁 config/                  # Configuration files
-├── 📁 tests/                   # Test suites
-├── package.json                # Project dependencies
-└── PROJECT_STRUCTURE.md        # Detailed architecture overview
+│   ├── wix-app.json           # Wix app configuration
+│   └── nginx.conf             # Nginx configuration
+├── 📁 src/                    # Source code
+│   ├── 📁 backend/            # Node.js API services
+│   │   ├── models/            # Database models
+│   │   ├── routes/            # API endpoints
+│   │   ├── services/          # Business logic
+│   │   ├── middleware/        # Express middleware
+│   │   └── utils/             # Utility functions
+│   ├── 📁 frontend/           # React application
+│   │   ├── src/
+│   │   │   ├── components/    # React components
+│   │   │   ├── pages/         # Page components
+│   │   │   ├── store/         # Redux store
+│   │   │   └── services/      # API services
+│   │   └── public/            # Static assets
+│   └── 📁 shared/             # Shared utilities
+├── 📁 tests/                  # Test suites
+│   ├── backend/               # Backend tests
+│   ├── frontend/              # Frontend tests
+│   └── e2e/                   # End-to-end tests
+├── 📁 docs/                   # Documentation
+├── Dockerfile                 # Docker configuration
+├── docker-compose.yml         # Development environment
+└── package.json               # Project dependencies
 ```
 
-## 🎯 Development Roadmap
+## 🛠️ Technology Stack
 
-### ✅ Phase 1: Foundation & Research (Weeks 1-2)
-- [x] Comprehensive market research completed
-- [x] Competitor analysis documented
-- [x] Project structure established
-- [x] Development guides created
-- [ ] Wix development environment setup
-- [ ] AI API integrations configured
+### Frontend
+- **React 18**: Modern UI development
+- **Wix Design System**: Native Wix components
+- **Redux Toolkit**: State management
+- **TypeScript**: Type safety
 
-### 🚧 Phase 2: Core Development (Weeks 3-8)
-- [ ] Wix app framework implementation
-- [ ] AI content generation pipeline
-- [ ] Competition management system
-- [ ] Coupon generation and distribution
-- [ ] Basic analytics dashboard
+### Backend
+- **Node.js & Express**: API development
+- **MongoDB**: Flexible data storage
+- **Redis**: Caching and sessions
+- **JWT**: Authentication
 
-### 🔄 Phase 3: Advanced Features (Weeks 9-12)
-- [ ] Multi-language support
-- [ ] Advanced analytics and reporting
-- [ ] Performance optimization
-- [ ] Security hardening
-- [ ] Mobile optimization
+### AI Integration
+- **OpenAI GPT**: Advanced content generation
+- **Anthropic Claude**: Creative enhancement
+- **Custom Models**: Competition optimization
 
-### 🧪 Phase 4: Testing & QA (Weeks 13-16)
-- [ ] Comprehensive test suite
-- [ ] Security auditing
-- [ ] Performance testing
-- [ ] User acceptance testing
-- [ ] Accessibility compliance
-
-### 🚀 Phase 5: Launch Preparation (Weeks 17-18)
-- [ ] Wix App Market submission
-- [ ] Marketing materials creation
-- [ ] Documentation finalization
-- [ ] Launch strategy execution
+### Development Tools
+- **Jest & Playwright**: Testing frameworks
+- **ESLint & Prettier**: Code quality
+- **GitHub Actions**: CI/CD pipeline
+- **Docker**: Containerization
 
 ## 📊 Market Research Insights
 
@@ -152,47 +168,6 @@ Our comprehensive market research reveals significant opportunities:
 - **Technical**: <2s load times, 99.9% uptime, <0.1% error rate
 - **Business**: 10K+ downloads, 70%+ retention, 4.5+ rating
 - **Impact**: 15-25% sales increase for users
-
-## 🛠️ Technology Stack
-
-### Frontend
-- **React 18**: Modern UI development
-- **Wix Design System**: Native Wix components
-- **Redux Toolkit**: State management
-- **TypeScript**: Type safety
-
-### Backend
-- **Node.js & Express**: API development
-- **MongoDB**: Flexible data storage
-- **Redis**: Caching and sessions
-- **JWT**: Authentication
-
-### AI Integration
-- **OpenAI GPT-5**: Advanced content generation
-- **Anthropic Claude**: Creative enhancement
-- **Custom Models**: Competition optimization
-
-### Development Tools
-- **Jest & Playwright**: Testing frameworks
-- **ESLint & Prettier**: Code quality
-- **GitHub Actions**: CI/CD pipeline
-- **Docker**: Containerization
-
-## 📖 Documentation
-
-### For Users
-- **[User Guide](docs/USER_GUIDE.md)**: Step-by-step usage instructions (Coming Soon)
-- **[FAQ](docs/FAQ.md)**: Common questions and answers (Coming Soon)
-- **[Video Tutorials](docs/TUTORIALS.md)**: Visual learning resources (Coming Soon)
-
-### For Developers
-- **[Developer Guide](docs/WIX_DEVELOPMENT_GUIDE.md)**: Wix development best practices
-- **[API Documentation](docs/API_DOCUMENTATION.md)**: Complete API reference (Coming Soon)
-- **[Contributing Guidelines](docs/CONTRIBUTING.md)**: How to contribute (Coming Soon)
-
-### For Testers
-- **[Testing Guide](docs/TESTING_GUIDE.md)**: Comprehensive testing procedures
-- **[Release Guide](docs/RELEASE_GUIDE.md)**: Production deployment steps
 
 ## 🧪 Testing
 
@@ -223,29 +198,77 @@ npm run test:coverage
 
 ## 🚀 Deployment
 
-### Staging Environment
+### Development with Docker
 ```bash
-npm run deploy:staging
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
 ```
 
-### Production Environment
+### Production Deployment
 ```bash
-npm run build:production
-npm run deploy:production
+# Build production image
+docker build -t wix-competition-app .
+
+# Run with environment variables
+docker run -d \
+  -p 3001:3001 \
+  -e NODE_ENV=production \
+  -e DATABASE_URL=your-mongodb-url \
+  wix-competition-app
 ```
 
-### Wix App Market
-Follow the detailed steps in [Release Guide](docs/RELEASE_GUIDE.md)
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `NODE_ENV` | Environment (development/production) | Yes |
+| `DATABASE_URL` | MongoDB connection string | Yes |
+| `REDIS_URL` | Redis connection string | No |
+| `JWT_SECRET` | JWT signing secret | Yes |
+| `WIX_CLIENT_ID` | Wix app client ID | Yes |
+| `WIX_CLIENT_SECRET` | Wix app client secret | Yes |
+| `OPENAI_API_KEY` | OpenAI API key | No |
+| `ANTHROPIC_API_KEY` | Anthropic API key | No |
+
+## 📖 Documentation
+
+### For Users
+- **[User Guide](docs/USER_GUIDE.md)**: Step-by-step usage instructions
+- **[FAQ](docs/FAQ.md)**: Common questions and answers
+- **[Video Tutorials](docs/TUTORIALS.md)**: Visual learning resources
+
+### For Developers
+- **[Developer Guide](docs/WIX_DEVELOPMENT_GUIDE.md)**: Wix development best practices
+- **[API Documentation](docs/API_DOCUMENTATION.md)**: Complete API reference
+- **[Contributing Guidelines](docs/CONTRIBUTING.md)**: How to contribute
+
+### For Testers
+- **[Testing Guide](docs/TESTING_GUIDE.md)**: Comprehensive testing procedures
+- **[Release Guide](docs/RELEASE_GUIDE.md)**: Production deployment steps
 
 ## 🤝 Contributing
 
-We welcome contributions! Please read our [Contributing Guidelines](docs/CONTRIBUTING.md) (Coming Soon) for details on:
+We welcome contributions! Please read our [Contributing Guidelines](docs/CONTRIBUTING.md) for details on:
 
 - Code of conduct
 - Development process
 - Submitting pull requests
 - Reporting bugs
 - Suggesting features
+
+### Development Setup
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Ensure all tests pass
+6. Submit a pull request
 
 ## 📝 License
 
@@ -254,9 +277,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - **Documentation**: Check our comprehensive guides
-- **Issues**: Report bugs via GitHub Issues
+- **Issues**: Report bugs via [GitHub Issues](https://github.com/andreaskviby/wix-plugin-discount-competition/issues)
 - **Discussions**: Join community discussions
-- **Email**: support@your-domain.com (Configure your support email)
+- **Email**: support@your-domain.com
 
 ## 🌟 Acknowledgments
 
@@ -264,6 +287,39 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - OpenAI and Anthropic for revolutionary AI capabilities
 - The open-source community for inspiration and tools
 - Beta testers for valuable feedback and suggestions
+
+## 📈 Development Roadmap
+
+### ✅ Phase 1: Foundation (COMPLETED)
+- [x] Project structure and configuration
+- [x] Backend API with authentication
+- [x] React frontend with Redux
+- [x] Basic UI components
+
+### ✅ Phase 2: Core Features (COMPLETED)
+- [x] Database models and integration
+- [x] AI content generation service
+- [x] Wix API integration
+- [x] Competition management UI
+
+### 🚧 Phase 3: Advanced Features (IN PROGRESS)
+- [x] Advanced analytics dashboard
+- [x] Comprehensive settings interface
+- [ ] Real-time notifications
+- [ ] Multi-language content generation
+- [ ] Performance optimization
+
+### 📋 Phase 4: Testing & QA (PLANNED)
+- [ ] Comprehensive test coverage
+- [ ] E2E testing with Playwright
+- [ ] Security auditing
+- [ ] Performance testing
+
+### 🎯 Phase 5: Launch Preparation (PLANNED)
+- [ ] Wix App Market submission
+- [ ] Marketing materials
+- [ ] User documentation
+- [ ] Launch strategy
 
 ---
 
