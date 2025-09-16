@@ -4,6 +4,8 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
 const winston = require('winston');
+const database = require('./utils/database');
+const aiContentService = require('./services/aiContentService');
 
 // Load environment variables
 dotenv.config();
@@ -63,12 +65,18 @@ app.use((req, res, next) => {
 });
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/health', async (req, res) => {
+  const dbHealth = await database.healthCheck();
+  
   res.status(200).json({
     status: 'OK',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    database: dbHealth,
+    services: {
+      ai: aiContentService.getUsageStats()
+    }
   });
 });
 
@@ -112,8 +120,30 @@ app.use('*', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
-});
+async function startServer() {
+  try {
+    // Initialize database
+    if (process.env.NODE_ENV !== 'test') {
+      await database.connect();
+      await database.createIndexes();
+      await database.seedData();
+    }
+
+    // Initialize AI services
+    await aiContentService.initialize();
+
+    app.listen(PORT, () => {
+      logger.info(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+    });
+  } catch (error) {
+    logger.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+// Only start server if this file is run directly
+if (require.main === module) {
+  startServer();
+}
 
 module.exports = app;
