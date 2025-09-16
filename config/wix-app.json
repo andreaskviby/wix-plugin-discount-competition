@@ -1,0 +1,146 @@
+{
+  "appDefinitionId": "your-app-definition-id",
+  "appName": "Discount Competition Master",
+  "appVersion": "1.0.0",
+  "platform": {
+    "minWixVersion": "1.500.0"
+  },
+  "components": {
+    "dashboard": {
+      "componentType": "STUDIO_DASHBOARD",
+      "route": "/dashboard",
+      "widgetId": "discount-competition-dashboard",
+      "published": true
+    },
+    "settings": {
+      "componentType": "STUDIO_SETTINGS",
+      "route": "/settings",
+      "widgetId": "discount-competition-settings",
+      "published": true
+    },
+    "widget": {
+      "componentType": "WIDGET_OUT_OF_IFRAME",
+      "route": "/widget",
+      "widgetId": "discount-competition-widget",
+      "published": true,
+      "seo": {
+        "isIndexable": true
+      }
+    }
+  },
+  "permissions": {
+    "wixStores": {
+      "required": true,
+      "description": "Access to store data for competition management"
+    },
+    "wixUsers": {
+      "required": true, 
+      "description": "Access to customer data for participation tracking"
+    },
+    "wixMarketing": {
+      "required": true,
+      "description": "Access to marketing tools for promotion campaigns"
+    },
+    "wixAnalytics": {
+      "required": true,
+      "description": "Access to analytics data for performance tracking"
+    },
+    "wixData": {
+      "required": true,
+      "description": "Access to database for storing competition data"
+    }
+  },
+  "appFields": [
+    {
+      "fieldKey": "competitionType",
+      "fieldType": "DROPDOWN",
+      "displayName": "Default Competition Type",
+      "defaultValue": "SPIN_WHEEL",
+      "options": [
+        {
+          "value": "SPIN_WHEEL",
+          "label": "Spin Wheel"
+        },
+        {
+          "value": "QUIZ", 
+          "label": "Quiz"
+        },
+        {
+          "value": "INSTANT_WIN",
+          "label": "Instant Win"
+        },
+        {
+          "value": "PHOTO_CONTEST",
+          "label": "Photo Contest"
+        }
+      ]
+    },
+    {
+      "fieldKey": "primaryColor",
+      "fieldType": "COLOR",
+      "displayName": "Primary Color",
+      "defaultValue": "#3366ff"
+    },
+    {
+      "fieldKey": "enableAI",
+      "fieldType": "BOOLEAN",
+      "displayName": "Enable AI Content Generation",
+      "defaultValue": true
+    }
+  ],
+  "eventHandlers": {
+    "onAppInstalled": {
+      "endpoint": "/api/wix/webhook",
+      "method": "POST"
+    },
+    "onAppRemoved": {
+      "endpoint": "/api/wix/webhook", 
+      "method": "POST"
+    },
+    "onStoreOrderCreated": {
+      "endpoint": "/api/wix/webhook",
+      "method": "POST"
+    },
+    "onStoreProductCreated": {
+      "endpoint": "/api/wix/webhook",
+      "method": "POST"
+    }
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "outputDir": "build",
+    "environment": {
+      "REACT_APP_API_URL": "$API_URL",
+      "REACT_APP_WIX_APP_ID": "$WIX_APP_ID"
+    }
+  },
+  "deployment": {
+    "type": "SERVERLESS",
+    "regions": ["us-east-1", "eu-west-1"],
+    "scaling": {
+      "minInstances": 1,
+      "maxInstances": 10
+    }
+  },
+  "monitoring": {
+    "healthCheck": {
+      "path": "/health",
+      "interval": 300
+    },
+    "logging": {
+      "level": "info",
+      "retentionDays": 30
+    }
+  },
+  "security": {
+    "cors": {
+      "allowedOrigins": ["*.wixsite.com", "*.editorx.com"],
+      "allowedMethods": ["GET", "POST", "PUT", "DELETE"],
+      "allowedHeaders": ["Content-Type", "Authorization"]
+    },
+    "rateLimit": {
+      "windowMs": 900000,
+      "maxRequests": 100
+    }
+  }
+}
